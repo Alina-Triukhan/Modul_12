@@ -34,7 +34,6 @@ class Numbers {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     public void fizz() {
