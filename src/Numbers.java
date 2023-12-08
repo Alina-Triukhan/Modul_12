@@ -12,6 +12,31 @@ class Numbers {
         this.n = n;
     }
 
+    public static void main(String[] args) {
+        int n = 15;
+        Numbers fizzBuzz = new Numbers(n);
+
+        Thread threadA = new Thread(fizzBuzz::fizz);
+        Thread threadB = new Thread(fizzBuzz::buzz);
+        Thread threadC = new Thread(fizzBuzz::fizzbuzz);
+        Thread threadD = new Thread(fizzBuzz::number);
+
+        threadA.start();
+        threadB.start();
+        threadC.start();
+        threadD.start();
+
+        try {
+            threadA.join();
+            threadB.join();
+            threadC.join();
+            threadD.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void fizz() {
         for (int i = 1; i <= n; i++) {
             if (i % 3 == 0 && i % 5 != 0) {
@@ -47,6 +72,7 @@ class Numbers {
             }
         }
     }
+
     public void fizzbuzz() {
         for (int i = 1; i <= n; i++) {
             if ((i % 3 == 0) && (i % 5 == 0)) {
@@ -74,16 +100,16 @@ class Numbers {
                 String buzzResult = buzzQueue.take();
 
                 if ("fizzbuzz".equals(fizzbuzzResult)) {
-                    strArr[i-1] = "fizzbuzz";
+                    strArr[i - 1] = "fizzbuzz";
                     //System.out.println("fizzbuzz");
                 } else if ("fizz".equals(fizzResult)) {
-                    strArr[i-1] = "fizz";
+                    strArr[i - 1] = "fizz";
                     //System.out.println("fizz");
                 } else if ("buzz".equals(buzzResult)) {
-                    strArr[i-1] = "buzz";
+                    strArr[i - 1] = "buzz";
                     // System.out.println("buzz");
                 } else {
-                    strArr[i-1] = String.valueOf(i);
+                    strArr[i - 1] = String.valueOf(i);
                     // System.out.println(i);
                 }
             } catch (InterruptedException e) {
@@ -91,30 +117,5 @@ class Numbers {
             }
         }
         System.out.println("str: " + Arrays.toString(strArr));
-    }
-
-    public static void main(String[] args) {
-        int n = 15;
-        Numbers fizzBuzz = new Numbers(n);
-
-        Thread threadA = new Thread(fizzBuzz::fizz);
-        Thread threadB = new Thread(fizzBuzz::buzz);
-        Thread threadC = new Thread(fizzBuzz::fizzbuzz);
-        Thread threadD = new Thread(fizzBuzz::number);
-
-        threadA.start();
-        threadB.start();
-        threadC.start();
-        threadD.start();
-
-        try {
-            threadA.join();
-            threadB.join();
-            threadC.join();
-            threadD.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 }
