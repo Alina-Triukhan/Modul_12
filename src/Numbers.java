@@ -116,6 +116,6 @@ class Numbers {
                 e.printStackTrace();
             }
         }
-        System.out.println("str: " + Arrays.toString(strArr));
+        System.out.println(Arrays.toString(strArr));
     }
 }
