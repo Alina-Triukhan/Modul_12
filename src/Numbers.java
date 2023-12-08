@@ -92,7 +92,7 @@ class Numbers {
     }
 
     public void number() {
-        String[] strArr = new String[n];
+        StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= n; i++) {
             try {
                 String fizzbuzzResult = fizzbuzzQueue.take();
@@ -100,22 +100,46 @@ class Numbers {
                 String buzzResult = buzzQueue.take();
 
                 if ("fizzbuzz".equals(fizzbuzzResult)) {
-                    strArr[i - 1] = "fizzbuzz";
-                    //System.out.println("fizzbuzz");
+                    sb.append("fizzbuzz");
                 } else if ("fizz".equals(fizzResult)) {
-                    strArr[i - 1] = "fizz";
-                    //System.out.println("fizz");
+                    sb.append("fizz");
                 } else if ("buzz".equals(buzzResult)) {
-                    strArr[i - 1] = "buzz";
-                    // System.out.println("buzz");
+                    sb.append("buzz");
                 } else {
-                    strArr[i - 1] = String.valueOf(i);
-                    // System.out.println(i);
+                    sb.append(i);
+                }
+                if (i != n) {
+                    sb.append(", ");
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(Arrays.toString(strArr));
+        System.out.println(sb);
     }
+// //Це була перша версія, дочитала,що протрібно вивести рядок - виправила
+//
+//    public void number() {
+//        String[] strArr = new String[n];
+//        for (int i = 1; i <= n; i++) {
+//            try {
+//                String fizzbuzzResult = fizzbuzzQueue.take();
+//                String fizzResult = fizzQueue.take();
+//                String buzzResult = buzzQueue.take();
+//
+//                if ("fizzbuzz".equals(fizzbuzzResult)) {
+//                    strArr[i - 1] = "fizzbuzz";
+//                } else if ("fizz".equals(fizzResult)) {
+//                    strArr[i - 1] = "fizz";
+//                } else if ("buzz".equals(buzzResult)) {
+//                    strArr[i - 1] = "buzz";
+//                } else {
+//                    strArr[i - 1] = String.valueOf(i);
+//                }
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        System.out.println(Arrays.toString(strArr));
+//    }
 }
